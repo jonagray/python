@@ -32,6 +32,18 @@ class ListNode:
 
 This way, we've created a skeleton for a node that has three critical properties - the actual data, what came directly before it, and what comes immediately after it.
 
+## Note
+
+For some types of use cases, you may need the ListNode class to look a little bit different. For example, in order to complete the "Design Browser History" proble, one of the methods involves passing in a new ListNode as an argument. In order to make that work, my ListNode class ended up looking like this instead:
+
+```
+class ListNode:
+    def __init__(self, val, prev=None, next=None):
+        self.val = val
+        self.prev = prev
+        self.next = next
+```
+
 ## What does a Linked List look like?
 
 Let's break this down into two pieces - the initial scaffold of a linked list, and the basic methods we'd want to be able to perform with one.
