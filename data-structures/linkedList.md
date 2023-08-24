@@ -67,14 +67,19 @@ And I'm throwing in a bonus one just because I liked being able to see all the d
 
 ```
 def getAtIndex(self, index: int) -> int:
-  cur = self.left.next # We instantiate a var so we can traverse the list - set it to our first node with actual data, next to our dummy node
-  while cur and index > 0: # While our cur node has a value, and we haven't hit our ending dummy node, move to the next node
+  cur = self.left.next
+  while cur and index > 0:
     cur = cur.next
-    index -= 1 # By decrementing index each time, it will hit 0 once we've arrived at the right node
-  if cur and cur != self.right and index == 0: # Cur has a value, we haven't hit our ending dummy node, and index is 0, we know we've arrived.
+    index -= 1
+  if cur and cur != self.right and index == 0:
     return cur.val
-  return -1 # If all else fails, we know the index isn't there and we return -1 instead.
+  return -1
 ```
+* While our cur node has a value, and we haven't hit our ending dummy node, move to the next node.
+* We instantiate a var so we can traverse the list - set it to our first node with actual data, next to our dummy node.
+* By decrementing index each time, it will hit 0 once we've arrived at the right node.
+* Cur has a value, we haven't hit our ending dummy node, and index is 0, we know we've arrived.
+* If all else fails, we know the index isn't there and we return -1 instead.
 
 ### addAtIndex
 
@@ -85,12 +90,17 @@ def addAtIndex(self, index: int, val: int) -> int:
             cur = cur.next
             index -= 1
         if cur and index == 0:
-            node, next, prev = ListNode(val), cur, cur.prev # 3 vars, the new node (with value), next saves the current node, prev saves the previous node
-            prev.next = node # Set prev node's next pointer to our new node
-            next.prev = node # Set next node's prev pointer to our new node - now both surrounding nodes point to the correct spot
-            node.next = next # Set our new node's next pointer to the next node (we can do this because we saved the reference earlier)
-            node.prev = prev # Same thing here - set our new node's previous pointer to the previous node
+            node, next, prev = ListNode(val), cur, cur.prev
+            prev.next = node
+            next.prev = node
+            node.next = next
+            node.prev = prev
 ```
+* 3 vars, the new node (with value), next saves the current node, prev saves the previous node
+* Set prev node's next pointer to our new node
+* Set next node's prev pointer to our new node - now both surrounding nodes point to the correct spot
+* Set our new node's next pointer to the next node (we can do this because we saved the reference earlier)
+* Same thing - set our new node's previous pointer to the previous node
 
 ### deleteAtIndex
 
@@ -100,11 +110,15 @@ def addAtIndex(self, index: int, val: int) -> int:
       while cur and index > 0:
           cur = cur.next
           index -= 1
-      if cur and cur != cur.next and index == 0: # We need all 3 conditions so that we don't accidentally go "out of bounds to the last node"
-          next, prev = cur.next, cur.prev # Save the references for the next and previous node
-          next.prev = prev # Change pointer of next to point to the previous node
-          prev.next = next # Change pointer of previous node's next pointer to the next node
+      if cur and cur != cur.next and index == 0:
+          next, prev = cur.next, cur.prev
+          next.prev = prev
+          prev.next = next
 ```
+* We need all 3 conditions so that we don't accidentally go "out of bounds to the last node"
+* Save the references for the next and previous node
+* Change pointer of next to point to the previous node
+* Change pointer of previous node's next pointer to the next node
 
 ### addAtHead and addAtTail
 
